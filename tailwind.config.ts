@@ -14,6 +14,10 @@ const config: Config = {
           'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
       },
     },
+    fontFamily: {
+      sans: ['Axiforma', 'sans-serif'],
+      serif: ['Helvetica Neue LT Std', 'serif'],
+    },
   },
   plugins: [],
 }
