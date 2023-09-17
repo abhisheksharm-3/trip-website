@@ -1,5 +1,4 @@
 import "./globals.css";
-import Head from 'next/head';
 
 export default function RootLayout({
   children,
@@ -8,9 +7,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <Head>
-        <title>TripTalkies</title>
-      </Head>
+      
       <body>{children}</body>
     </html>
   );
