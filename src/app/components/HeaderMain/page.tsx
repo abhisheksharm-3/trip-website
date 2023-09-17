@@ -1,4 +1,5 @@
 import React from "react";
+import Link from "next/link";
 
 const HeaderMain = () => {
   return (
@@ -26,9 +27,11 @@ const HeaderMain = () => {
             </p>
           </div>
         </div>
+        <Link href="/login">
         <button className="text-white my-7 py-2 px-5 lg:px-10 text- max-w-max lg:text-lg font-semibold text-center rounded-lg bg-blue-400 hover:bg-blue-500 ease-in-out duration-500">
           Get Started
         </button>
+        </Link>
       </div>
     </div>
   );
