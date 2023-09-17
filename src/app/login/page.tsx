@@ -118,7 +118,7 @@ const Login = () => {
             Not a member yet?{" "}
           </span>
           <Link
-            href="/"
+            href="/signup"
             className="text-purple-500 text-[13px] font-semibold underline"
           >
             Sign Up
