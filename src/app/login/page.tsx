@@ -96,7 +96,7 @@ const Login = () => {
             </div>
             <div className="text-right">
               <Link
-                href="#"
+                href=""
                 className="text-center text-purple-500 text-sm font-normal hover:text-purple-600 ease-in-out duration-300  hover:font-medium underline"
                 onClick={() => setIsForgotPasswordOpen(true)}
               >
