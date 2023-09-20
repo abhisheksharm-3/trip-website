@@ -27,12 +27,12 @@ const Navbar = () => {
           </ul>
         </div>
         <div className="flex items-center gap-6">
-          <button className="font-sans text-white w-[103px] h-[38px] py-1.5 bg-white bg-opacity-25 rounded-[20px] border border-white hover:bg-opacity-50 duration-500 ease-in-out">
+          <Link href="/login" className="font-sans text-white w-[103px] h-[38px] py-1.5 bg-white bg-opacity-25 rounded-[20px] border border-white hover:bg-opacity-50 duration-500 ease-in-out text-center">
             Log In
-          </button>
-          <button className="font-sans text-white w-[103px] h-[38px] py-1.5 bg-white bg-opacity-25 rounded-[20px] border border-white hover:bg-opacity-50 duration-500 ease-in-out">
+          </Link>
+          <Link href="/signup" className="font-sans text-white w-[103px] h-[38px] py-1.5 bg-white bg-opacity-25 rounded-[20px] border border-white hover:bg-opacity-50 duration-500 ease-in-out text-center">
             Sign Up
-          </button>
+          </Link>
         </div>
       </nav>
       <nav className="flex lg:hidden items-center py-9 px-8">
