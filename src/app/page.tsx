@@ -1,12 +1,13 @@
 import LandingPage from "./landing/page"
-import Head from "next/head"
+import { Metadata } from 'next'
+ 
+export const metadata: Metadata = {
+  title: 'Title',
+}
 
 export default function Home() {
   return (
     <>
-    <Head>
-        <title>TripTalkies</title>
-      </Head>
     <LandingPage />
     </>
   )
