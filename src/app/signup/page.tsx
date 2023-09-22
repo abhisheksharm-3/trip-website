@@ -1,18 +1,53 @@
-"use client";
+"use client"
 import React, { useState } from "react";
 import Image from "next/image";
 import logo_dark from "../../../public/images/logo-dark.png";
 import signupimage from "../../../public/images/signup-image.svg";
 import google from "../../../public/images/google.svg";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
+import axios from "axios";
+import toast, { Toaster } from "react-hot-toast";
 
 const Signup = () => {
+  const router = useRouter();
+  const [buttonDisabled, setButtonDisabled] = React.useState(false);
+  const [user, setUser] = useState({});
+  const [loading, setLoading] = React.useState(false);
   const [firstName, setFirstName] = useState<string>("");
   const [lastName, setLastName] = useState<string>("");
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const [passwordStrength, setPasswordStrength] = useState<string>("");
-  const [showPasswordStrength, setShowPasswordStrength] = useState<boolean>(false);
+  const [showPasswordStrength, setShowPasswordStrength] = useState<boolean>(
+    false
+  );
+
+  const onSignup = async () => {
+    try {
+      setLoading(true);
+      setUser({
+        name: firstName + " " + lastName,
+        email: email,
+        password: password,
+      });
+      const response: any = await axios.post("/api/users/signup", user);
+      toast.success(response.message);
+      router.push("/login");
+    } catch (error: any) {
+      toast.error(error.message);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  React.useEffect(() => {
+    if (email.length > 6 && password.length > 8 && firstName.length > 2) {
+      setButtonDisabled(false);
+    } else {
+      setButtonDisabled(true);
+    }
+  }, [email, firstName, password]);
 
   const handleFirstNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFirstName(e.target.value);
@@ -45,7 +80,7 @@ const Signup = () => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    // Handle the form submission logic here.
+    onSignup();
   };
 
   return (
@@ -58,6 +93,7 @@ const Signup = () => {
         <Image src={signupimage} alt="logo" className="2xl:pt-10" priority />
       </div>
       <div className="h-2/3 w-screen lg:h-screen lg:w-2/3 flex flex-col items-center justify-center py-10 lg:py-0 px-11 lg:px-52 gap-6 lg:gap-3">
+        <Toaster position="top-right" reverseOrder={false} />
         <h1 className="text-2xl lg:text-3xl font-extrabold lg:leading-[42px]">
           Sign Up to Trip Talkies
         </h1>
@@ -72,10 +108,16 @@ const Signup = () => {
             Sign In with Google
           </button>
 
-          <form onSubmit={handleSubmit} className="mt-4 w-full lg:w-[75%]">
+          <form
+            onSubmit={handleSubmit}
+            className="mt-4 w-full lg:w-[75%]"
+          >
             <div className="mb-2 flex gap-4">
               <div className="w-1/2">
-                <label htmlFor="firstName" className="block text-black text-lg">
+                <label
+                  htmlFor="firstName"
+                  className="block text-black text-lg"
+                >
                   First Name
                 </label>
                 <input
@@ -88,7 +130,10 @@ const Signup = () => {
                 />
               </div>
               <div className="w-1/2">
-                <label htmlFor="lastName" className="block text-black text-lg">
+                <label
+                  htmlFor="lastName"
+                  className="block text-black text-lg"
+                >
                   Last Name
                 </label>
                 <input
@@ -127,7 +172,11 @@ const Signup = () => {
                 onChange={handlePasswordChange}
               />
             </div>
-            <div className={`relative h-2 mt-1 ${showPasswordStrength ? "" : "hidden"}`}>
+            <div
+              className={`relative h-2 mt-1 ${
+                showPasswordStrength ? "" : "hidden"
+              }`}
+            >
               <div
                 className={`absolute h-full w-full rounded-lg ${
                   passwordStrength === "Weak"
@@ -164,10 +213,15 @@ const Signup = () => {
             <div className="mt-2">
               <button
                 type="submit"
-                className="bg-blue-400 hover:bg-blue-500 ease-in-out duration-300 text-white font-semibold py-2 px-4 rounded-lg text-lg w-full"
+                className={`${
+                  buttonDisabled || loading
+                    ? "bg-gray-400 cursor-not-allowed"
+                    : "bg-blue-400 hover:bg-blue-500"
+                } ease-in-out duration-300 text-white font-semibold py-2 px-4 rounded-lg text-lg w-full`}
                 onClick={handleSubmit}
+                disabled={buttonDisabled || loading}
               >
-                Sign Up
+                {loading ? "Signing you up..." : "Sign Up"}
               </button>
             </div>
           </form>

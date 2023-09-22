@@ -9,10 +9,14 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@types/bcrypt": "^5.0.0",
+    "@types/bcryptjs": "^2.4.4",
     "@types/node": "20.6.1",
     "@types/react": "18.2.21",
     "@types/react-dom": "18.2.7",
+    "axios": "^1.5.0",
     "bcrypt": "^5.1.1",
+    "bcryptjs": "^2.4.3",
     "eslint": "8.49.0",
     "eslint-config-next": "^13.5.1",
     "mongoose": "^7.5.2",
@@ -20,6 +24,7 @@
     "normalize.css": "^8.0.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-hot-toast": "^2.4.1",
     "reset-css": "^5.0.2",
     "sharp": "^0.32.6",
     "typescript": "5.2.2"
