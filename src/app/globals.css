@@ -1,6 +1,7 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+@import '/path/to/reset-css/reset.css';
 
 @font-face {
     font-family: "Axiforma";

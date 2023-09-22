@@ -13,24 +13,30 @@ const Navbar = () => {
           <Image src={logo} priority className="w-52 h-10" alt="Logo" />
           <ul className=" flex flex-row gap-8 text-white">
             <li className="hover:text-gray-300 duration-500 ease-in-out text-lg font-sans">
-              <Link href="#">Home</Link>
+              <Link href="/">Home</Link>
             </li>
             <li className="hover:text-gray-300 duration-500 ease-in-out text-lg font-sans">
-              <Link href="#">About</Link>
+              <Link href="/about">About</Link>
             </li>
             <li className="hover:text-gray-300 duration-500 ease-in-out text-lg font-sans">
-              <Link href="#">Suggest a Place</Link>
+              <Link href="/suggestion">Suggest a Place</Link>
             </li>
             <li className="hover:text-gray-300 duration-500 ease-in-out text-lg font-sans">
-              <Link href="#">Vote</Link>
+              <Link href="/vote">Vote</Link>
             </li>
           </ul>
         </div>
-        <div className="flex items-center gap-6">
-          <Link href="/login" className="font-sans text-white w-[103px] h-[38px] py-1.5 bg-white bg-opacity-25 rounded-[20px] border border-white hover:bg-opacity-50 duration-500 ease-in-out text-center">
+        <div className="flex gap-6">
+          <Link
+            href="/login"
+            className="font-sans text-white w-[103px] h-[38px] py-1.5 bg-white bg-opacity-25 rounded-[20px] border border-white hover:bg-opacity-50 duration-500 ease-in-out grid place-content-center"
+          >
             Log In
           </Link>
-          <Link href="/signup" className="font-sans text-white w-[103px] h-[38px] py-1.5 bg-white bg-opacity-25 rounded-[20px] border border-white hover:bg-opacity-50 duration-500 ease-in-out text-center">
+          <Link
+            href="/signup"
+            className="font-sans text-white w-[103px] h-[38px] py-1.5 bg-white bg-opacity-25 rounded-[20px] border border-white hover:bg-opacity-50 duration-500 ease-in-out grid place-content-center"
+          >
             Sign Up
           </Link>
         </div>
@@ -79,16 +85,16 @@ const Navbar = () => {
 
               <ul className="flex flex-col items-center justify-center w-screen h-screen gap-12 text-white ">
                 <li className="hover:text-gray-300 hover:underline duration-500 ease-in-out text-2xl font-bold font-sans">
-                  <Link href="#">Home</Link>
+                  <Link href="/">Home</Link>
                 </li>
                 <li className="hover:text-gray-300 hover:underline duration-500 ease-in-out text-2xl font-bold font-sans">
-                  <Link href="#">About</Link>
+                  <Link href="/about">About</Link>
                 </li>
                 <li className="hover:text-gray-300 hover:underline duration-500 ease-in-out text-2xl font-bold font-sans">
-                  <Link href="#">Suggest a Place</Link>
+                  <Link href="/suggestion">Suggest a Place</Link>
                 </li>
                 <li className="hover:text-gray-300 hover:underline duration-500 ease-in-out text-2xl font-bold font-sans">
-                  <Link href="#">Vote</Link>
+                  <Link href="/vote">Vote</Link>
                 </li>
               </ul>
             </div>

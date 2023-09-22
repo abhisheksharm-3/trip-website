@@ -1,4 +1,5 @@
 import "./globals.css";
+import 'normalize.css';
 
 export default function RootLayout({
   children,

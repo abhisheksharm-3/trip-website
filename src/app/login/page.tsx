@@ -1,4 +1,4 @@
-"use client";
+"use client"
 import React, { useState } from "react";
 import Image from "next/image";
 import logo_dark from "../../../public/images/logo-dark.png";
@@ -7,21 +7,21 @@ import google from "../../../public/images/google.svg";
 import Link from "next/link";
 
 const Login = () => {
-  const [username, setUsername] = useState<string>("");
-  const [password, setPassword] = useState<string>("");
-  const [isForgotPasswordOpen, setIsForgotPasswordOpen] =
-    useState<boolean>(false);
-  const [email, setEmail] = useState<string>("");
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const [isForgotPasswordOpen, setIsForgotPasswordOpen] = useState(false);
+  const [email, setEmail] = useState("");
+  const [resetPasswordSuccess, setResetPasswordSuccess] = useState(false);
 
-  const handleUsernameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleUsernameChange = (e: any) => {
     setUsername(e.target.value);
   };
 
-  const handlePasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handlePasswordChange = (e: any) => {
     setPassword(e.target.value);
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = (e: any) => {
     e.preventDefault();
   };
 
@@ -31,16 +31,23 @@ const Login = () => {
 
   const closeForgotPasswordPopup = () => {
     setIsForgotPasswordOpen(false);
+    setResetPasswordSuccess(false); // Reset the success state
   };
 
-  const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleEmailChange = (e: any) => {
     setEmail(e.target.value);
   };
 
-  const handleForgotPasswordSubmit = (e: React.FormEvent) => {
+  const handleForgotPasswordSubmit = (e: any) => {
     e.preventDefault();
-    // Handle the forgot password logic here, e.g., send a reset link to the provided email.
-    closeForgotPasswordPopup();
+
+    // Simulate sending a reset email (replace with your actual email logic)
+    // For now, we'll just set a timeout to simulate the email sending process.
+    setTimeout(() => {
+      setResetPasswordSuccess(true);
+    }, 2000); // Adjust the time as needed
+
+    // You should also handle errors if the email sending fails.
   };
 
   return (
@@ -53,79 +60,80 @@ const Login = () => {
         <Image src={loginimage} alt="logo" className="2xl:pt-10" priority />
       </div>
       <div className="h-2/3 w-screen lg:h-screen lg:w-2/3 flex flex-col items-center justify-center py-10 px-11 lg:px-52 gap-6 lg:gap-10">
-        <h1 className="text-2xl lg:text-3xl font-extrabold lg:leading-[42px]">
-          Sign in to Trip Talkies
-        </h1>
+        <div className=" flex flex-col items-center">
+          <h1 className="text-2xl lg:text-3xl font-extrabold lg:leading-[42px]">
+            Sign in to Trip Talkies
+          </h1>
 
-        <div className="flex flex-col-reverse gap-6 lg:flex-col items-center justify-center">
-          <button className="text-black font-extralight max-w-max max-h-max py-2 border-2 rounded-lg shadow-md lg:w-[75%]">
-            <Image
-              src={google}
-              alt="Google logo"
-              className="w-[10%] inline mr-6"
-            />
-            Sign In with Google
-          </button>
+          <div className="flex flex-col-reverse gap-6 lg:flex-col items-center justify-center max-w-full">
+            <button className="text-black font-extralight w-full max-h-max py-2 border-2 rounded-lg shadow-md lg:w-[75%]">
+              <Image
+                src={google}
+                alt="Google logo"
+                className="w-[10%] inline mr-6"
+              />
+              Sign In with Google
+            </button>
 
-          <form onSubmit={handleSubmit} className="mt-4 w-full lg:w-[75%]">
-            <div className="mb-4">
-              <label htmlFor="username" className="block text-black text-lg">
-                Username
-              </label>
-              <input
-                type="text"
-                id="username"
-                name="username"
-                className="border-2 rounded-lg w-full py-2 px-4 text-black bg-[#efefef]"
-                value={username}
-                onChange={handleUsernameChange}
-              />
-            </div>
-            <div className="mb-4">
-              <label htmlFor="password" className="block text-black text-lg">
-                Password
-              </label>
-              <input
-                type="password"
-                id="password"
-                name="password"
-                className="border-2 rounded-lg w-full py-2 px-4 text-black bg-[#efefef]"
-                value={password}
-                onChange={handlePasswordChange}
-              />
-            </div>
-            <div className="text-right">
-              <p
-                className="text-right cursor-pointer text-purple-500 text-sm font-normal hover:text-purple-600 ease-in-out duration-300  hover:font-medium underline"
-                onClick={() => setIsForgotPasswordOpen(true)}
-              >
-                Forgot Password?
-              </p>
-            </div>
-            <div className="mt-4">
-              <button
-                type="submit"
-                className="bg-violet-400 hover:bg-violet-500 ease-in-out duration-300 text-white font-semibold py-2 px-4 rounded-lg text-lg w-full"
-                onClick={handleSubmit}
-              >
-                Sign In
-              </button>
-            </div>
-          </form>
-        </div>
-        <div className="text-center">
-          <span className="text-stone-300 text-[13px] font-normal">
-            Not a member yet?{" "}
-          </span>
-          <Link
-            href="/signup"
-            className="text-purple-500 text-[13px] font-semibold underline"
-          >
-            Sign Up
-          </Link>
+            <form onSubmit={handleSubmit} className="mt-4 w-full lg:w-[75%]">
+              <div className="mb-4">
+                <label htmlFor="username" className="block text-black text-lg">
+                  Username
+                </label>
+                <input
+                  type="text"
+                  id="username"
+                  name="username"
+                  className="border-2 rounded-lg w-full py-2 px-4 text-black bg-[#efefef]"
+                  value={username}
+                  onChange={handleUsernameChange}
+                />
+              </div>
+              <div className="mb-4">
+                <label htmlFor="password" className="block text-black text-lg">
+                  Password
+                </label>
+                <input
+                  type="password"
+                  id="password"
+                  name="password"
+                  className="border-2 rounded-lg w-full py-2 px-4 text-black bg-[#efefef]"
+                  value={password}
+                  onChange={handlePasswordChange}
+                />
+              </div>
+              <div className="text-right">
+                <p
+                  className="text-right cursor-pointer text-purple-500 text-sm font-normal hover:text-purple-600 ease-in-out duration-300  hover:font-medium underline"
+                  onClick={() => setIsForgotPasswordOpen(true)}
+                >
+                  Forgot Password?
+                </p>
+              </div>
+              <div className="mt-4">
+                <button
+                  type="submit"
+                  className="bg-violet-400 hover:bg-violet-500 ease-in-out duration-300 text-white font-semibold py-2 px-4 rounded-lg text-lg w-full"
+                  onClick={handleSubmit}
+                >
+                  Sign In
+                </button>
+              </div>
+            </form>
+          </div>
+          <div className="text-center mt-3">
+            <span className="text-stone-300 text-[13px] font-normal">
+              Not a member yet?{" "}
+            </span>
+            <Link
+              href="/signup"
+              className="text-purple-500 text-[13px] font-semibold underline"
+            >
+              Sign Up
+            </Link>
+          </div>
         </div>
       </div>
-
 
       {isForgotPasswordOpen && (
         <div className="fixed inset-0 flex items-center justify-center z-50 bg-black bg-opacity-50 backdrop-blur-sm">
@@ -136,31 +144,57 @@ const Login = () => {
             >
               &times;
             </button>
-            <h2 className="text-2xl font-extrabold pt-8 text-center">Forgot Your Password?</h2>
-            <p className="w-72 text-center text-neutral-500 text-sm font-normal pt-4">Don&apos;t worry! Enter the email address you&apos;re using for your account below and we will send you a password reset link.</p>
-            <form onSubmit={handleForgotPasswordSubmit} className="mt-4 flex items-center flex-col">
-              <div className="mb-4 pt-3">
-                <label htmlFor="email" className="block text-black text-lg font-semibold">
-                  Email Address
-                </label>
-                <input
-                  type="email"
-                  id="email"
-                  name="email"
-                  className="border-2 rounded-lg w-full py-2 px-4 text-black bg-[#efefef]"
-                  value={email}
-                  onChange={handleEmailChange}
-                />
-              </div>
-              <div className="mt-6">
-                <button
-                  type="submit"
-                  className="bg-blue-400 hover:bg-blue-500 ease-in-out duration-300 text-white font-semibold py-2 px-4 rounded-lg text-lg max-w-max"
+            {resetPasswordSuccess ? (
+              <>
+                <h2 className="text-center text-3xl font-extrabold  leading-[42px] pt-4">
+                  All Done!
+                </h2>
+                <p className="w-[319px] text-center text-neutral-600 text-sm font-semibold p-8">
+                  If an account exists for {email}, you will get an email with
+                  instructions on resetting your password. If it doesn&apos;t arrive,
+                  be sure to check your spam folder.
+                </p>
+              </>
+            ) : (
+              <>
+                <h2 className="text-2xl font-extrabold pt-8 text-center">
+                  Forgot Your Password?
+                </h2>
+                <p className="w-72 text-center text-neutral-500 text-sm font-normal pt-4">
+                  Don&apos;t worry! Enter the email address you&apos;re using for your
+                  account below, and we will send you a password reset link.
+                </p>
+                <form
+                  onSubmit={handleForgotPasswordSubmit}
+                  className="mt-4 flex items-center flex-col"
                 >
-                  Reset Password
-                </button>
-              </div>
-            </form>
+                  <div className="mb-4 pt-3">
+                    <label
+                      htmlFor="email"
+                      className="block text-black text-lg font-semibold"
+                    >
+                      Email Address
+                    </label>
+                    <input
+                      type="email"
+                      id="email"
+                      name="email"
+                      className="border-2 rounded-lg w-full py-2 px-4 text-black bg-[#efefef]"
+                      value={email}
+                      onChange={handleEmailChange}
+                    />
+                  </div>
+                  <div className="mt-6">
+                    <button
+                      type="submit"
+                      className="bg-blue-400 hover:bg-blue-500 ease-in-out duration-300 text-white font-semibold py-2 px-4 rounded-lg text-lg max-w-max"
+                    >
+                      Reset Password
+                    </button>
+                  </div>
+                </form>
+              </>
+            )}
           </div>
         </div>
       )}
