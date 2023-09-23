@@ -1,9 +1,9 @@
+@import "/path/to/reset-css/reset.css";
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-@import '/path/to/reset-css/reset.css';
 
 @font-face {
-    font-family: "Axiforma";
-    src: url("../font/Axiforma-Regular.ttf");
-  }
+  font-family: "Axiforma";
+  src: url("../font/Axiforma-Regular.ttf");
+}

@@ -23,25 +23,17 @@ const Login = () => {
   const [resetPasswordSuccess, setResetPasswordSuccess] = useState(false);
 
   const onLogin = async () => {
-    let status;
     try {
       setLoading(true);
       setUser({
         email: email,
         password: password,
       });
-      const response: any = await axios.post("/api/users/login", user);
-      const { status } = await response.json();
+      const response = await axios.post("/api/users/login", user);
       toast.success("Login successful! You're in! 🚀");
       router.push("/profile");
     } catch (error: any) {
-      if (status === 400) {
-        toast.error(
-          "Invalid email or password. Please check your credentials."
-        );
-      } else {
-        toast.error(`Oops! Something went wrong, Please Try again or contact Admin`);
-      }
+      toast.error(`Oops! Something went wrong: ${error.message}`);
     } finally {
       setLoading(false);
     }
@@ -79,14 +71,11 @@ const Login = () => {
     // For now, we'll just set a timeout to simulate the email sending process.
     setTimeout(() => {
       setResetPasswordSuccess(true);
+      toast.success("Password reset email sent! Check your inbox. 📬");
     }, 2000); // Adjust the time as needed
 
-    if (resetPasswordSuccess === false) {
-      toast.error(
-        "Oops! Something went wrong while sending the reset email. Please try again later."
-      );
-    } else {
-      toast.success("Password reset email sent! Check your inbox. 📬");
+    if(resetPasswordSuccess === false){
+      toast.error("Oops! Something went wrong while sending the reset email. Please try again later.");
     }
 
     // You should also handle errors if the email sending fails.
@@ -120,10 +109,7 @@ const Login = () => {
 
             <form onSubmit={onLogin} className="mt-4 w-full lg:w-[75%]">
               <div className="mb-4">
-                <label
-                  htmlFor="email"
-                  className="block text-black dark:text-white text-lg"
-                >
+                <label htmlFor="email" className="block text-black dark:text-white text-lg">
                   Email
                 </label>
                 <input
@@ -136,10 +122,7 @@ const Login = () => {
                 />
               </div>
               <div className="mb-4">
-                <label
-                  htmlFor="password"
-                  className="block text-black dark:text-white text-lg"
-                >
+                <label htmlFor="password" className="block text-black dark:text-white text-lg">
                   Password
                 </label>
                 <input

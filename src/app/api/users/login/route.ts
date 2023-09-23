@@ -15,7 +15,6 @@ export async function POST(request: NextRequest) {
 
     const user = await User.findOne({ email });
 
-
     //check password validation
     const validPassword = await bcryptjs.compare(password, user.password);
     if (!validPassword) {
