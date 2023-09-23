@@ -74,9 +74,9 @@ const Login = () => {
       toast.success("Password reset email sent! Check your inbox. 📬");
     }, 2000); // Adjust the time as needed
 
-    if(resetPasswordSuccess === false){
-      toast.error("Oops! Something went wrong while sending the reset email. Please try again later.");
-    }
+    // if(resetPasswordSuccess === false){
+    //   toast.error("Oops! Something went wrong while sending the reset email. Please try again later.");
+    // }
 
     // You should also handle errors if the email sending fails.
   };
