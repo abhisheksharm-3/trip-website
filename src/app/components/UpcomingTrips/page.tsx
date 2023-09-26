@@ -2,7 +2,7 @@ import React from "react";
 import Image from "next/image";
 import arrow from "../../../../public/images/arrow-right.svg";
 
-const UpcomingTrip = ({ isAdmin }: { isAdmin: boolean }) => {
+const UpcomingTrip = ({ isAdmin }: any) => {
   const showAddTripButton = isAdmin;
 
   return (
