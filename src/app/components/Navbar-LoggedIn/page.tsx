@@ -38,7 +38,7 @@ const NavbarLoggedIn = () => {
         <div className="flex gap-6">
           <ul className=" flex flex-row gap-12 text-white items-center justify-center font-bold">
             <li className="hover:text-gray-300 duration-500 ease-in-out text-lg font-sans">
-              <Link href="/">Home</Link>
+              <Link href="/profile">Home</Link>
             </li>
             <li className="hover:text-gray-300 duration-500 ease-in-out text-lg font-sans">
               <Link href="/about">About</Link>

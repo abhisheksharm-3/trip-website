@@ -4,6 +4,7 @@ import { NextRequest, NextResponse } from "next/server";
 import bcryptjs from "bcryptjs";
 import jwt from "jsonwebtoken";
 
+
 connect();
 
 export async function POST(request: NextRequest) {
@@ -30,8 +31,6 @@ export async function POST(request: NextRequest) {
     //create token data
     const tokenData = {
       id: user._id,
-      username: user.username,
-      email: user.email,
     };
     //create token
     const token = await jwt.sign(tokenData, process.env.TOKEN_SECRET!, {
