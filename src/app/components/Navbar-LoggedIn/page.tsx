@@ -58,11 +58,11 @@ const NavbarLoggedIn = () => {
                 <div className=" absolute bg-white rounded-lg mt-44">
                     <Image src={menu} priority className="ease-in-out duration-300 rotate-180 translate-x-[139px] -translate-y-2" alt="menu"/>
                   <ul className="py-3 px-4 flex flex-col items-center justify-center gap-3">
-                    <li className="hover:bg-gray-200 cursor-pointer flex gap-16 rounded-lg p-2 text-center">
+                    <li className="hover:bg-gray-200 cursor-pointer flex gap-16 rounded-lg p-2 text-center text-black">
                     <Image src={gear} priority className="" alt="gear"/> 
                       <Link href="/settings">Settings</Link>
                     </li>
-                    <li className="hover:bg-gray-200 cursor-pointer flex gap-16 rounded-lg p-2 text-center">
+                    <li className="hover:bg-gray-200 cursor-pointer flex gap-16 rounded-lg p-2 text-center text-black">
                     <Image src={exit} priority className="" alt="exit"/>
                       <button onClick={logout}>Log Out</button>
                     </li>

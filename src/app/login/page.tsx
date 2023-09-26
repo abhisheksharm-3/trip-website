@@ -10,26 +10,23 @@ import axios from "axios";
 import toast, { Toaster } from "react-hot-toast";
 
 const Login = () => {
-  const [password, setPassword] = useState("");
   const router = useRouter();
-  const [user, setUser] = useState({
-    email: "",
-    password: "",
-  });
+  const [password, setPassword] = useState("");
   const [buttonDisabled, setButtonDisabled] = useState(false);
   const [loading, setLoading] = useState(false);
   const [isForgotPasswordOpen, setIsForgotPasswordOpen] = useState(false);
   const [email, setEmail] = useState("");
   const [resetPasswordSuccess, setResetPasswordSuccess] = useState(false);
 
-  const onLogin = async () => {
+  const onLogin = React.useCallback(async () => {
     try {
       setLoading(true);
-      setUser({
+      const userToLogin = {
         email: email,
         password: password,
-      });
-      const response = await axios.post("/api/users/login", user);
+      };
+      console.log(userToLogin)
+      const response = await axios.post("/api/users/login", userToLogin);
       toast.success("Login successful! You're in! 🚀");
       router.push("/profile");
     } catch (error: any) {
@@ -37,7 +34,7 @@ const Login = () => {
     } finally {
       setLoading(false);
     }
-  };
+  }, [email, password, router]);
 
   React.useEffect(() => {
     if (email.length > 6 && password.length > 8) {
