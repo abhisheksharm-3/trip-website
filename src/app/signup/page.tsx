@@ -32,7 +32,7 @@ const Signup = () => {
         password: password,
       });
       const response: any = await axios.post("/api/users/signup", user);
-      toast.success(response.message);
+      toast.success("🚀 Hooray! You've successfully blasted off into the adventure of a lifetime! Welcome aboard, space explorer! 🌌🪐👨‍🚀");
       router.push("/login");
     } catch (error: any) {
       toast.error(error.message);

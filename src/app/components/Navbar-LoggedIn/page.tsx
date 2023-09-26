@@ -2,24 +2,24 @@
 import React from "react";
 import Image from "next/image";
 import logo from "../../../../public/images/logo.png";
-import woman from "../../../../public/images/woman-avatar.svg"
-import menu from "../../../../public/images/menu-triangle.svg"
-import gear from "../../../../public/images/gear.svg"
-import exit from "../../../../public/images/exit.svg"
+import woman from "../../../../public/images/woman-avatar.svg";
+import menu from "../../../../public/images/menu-triangle.svg";
+import gear from "../../../../public/images/gear.svg";
+import exit from "../../../../public/images/exit.svg";
 import Link from "next/link";
 import axios from "axios";
 import toast from "react-hot-toast";
-import {useRouter} from "next/navigation";
+import { useRouter } from "next/navigation";
 
 const NavbarLoggedIn = () => {
-    const router = useRouter();
+  const router = useRouter();
   const [toggleMenu, setToggleMenu] = React.useState(false);
-  const [dropdownMenu, setDropdownMwnu] = React.useState(false)
+  const [dropdownMenu, setDropdownMwnu] = React.useState(false);
   const [triangleRotation, setTriangleRotation] = React.useState(0);
   const openDropdown = () => {
-        setDropdownMwnu(!dropdownMenu);
-        setTriangleRotation(dropdownMenu? 0 : 180);
-  }
+    setDropdownMwnu(!dropdownMenu);
+    setTriangleRotation(dropdownMenu ? 0 : 180);
+  };
   const logout = async () => {
     try {
       await axios.get("/api/users/logout");
@@ -50,20 +50,36 @@ const NavbarLoggedIn = () => {
               <Link href="/vote">Vote</Link>
             </li>
             <div className=" flex items-end justify-center flex-col">
-            <li onClick={openDropdown} className="hover:text-gray-300 duration-500 ease-in-out text-lg font-sans flex cursor-pointer gap-2">
-              <Link href=""><Image src={woman} priority className="" alt="Logo"/></Link>
-              <Image src={menu} priority className="ease-in-out duration-300" style={{ transform: `rotate(${triangleRotation}deg)` }} alt="menu"/>
-            </li>
-            {dropdownMenu && (
+              <li
+                onClick={openDropdown}
+                className="hover:text-gray-300 duration-500 ease-in-out text-lg font-sans flex cursor-pointer gap-2"
+              >
+                <Link href="">
+                  <Image src={woman} priority className="" alt="Logo" />
+                </Link>
+                <Image
+                  src={menu}
+                  priority
+                  className="ease-in-out duration-300"
+                  style={{ transform: `rotate(${triangleRotation}deg)` }}
+                  alt="menu"
+                />
+              </li>
+              {dropdownMenu && (
                 <div className=" absolute bg-white rounded-lg mt-44">
-                    <Image src={menu} priority className="ease-in-out duration-300 rotate-180 translate-x-[139px] -translate-y-2" alt="menu"/>
+                  <Image
+                    src={menu}
+                    priority
+                    className="ease-in-out duration-300 rotate-180 translate-x-[139px] -translate-y-2"
+                    alt="menu"
+                  />
                   <ul className="py-3 px-4 flex flex-col items-center justify-center gap-3">
                     <li className="hover:bg-gray-200 cursor-pointer flex gap-16 rounded-lg p-2 text-center text-black">
-                    <Image src={gear} priority className="" alt="gear"/> 
+                      <Image src={gear} priority className="" alt="gear" />
                       <Link href="/settings">Settings</Link>
                     </li>
                     <li className="hover:bg-gray-200 cursor-pointer flex gap-16 rounded-lg p-2 text-center text-black">
-                    <Image src={exit} priority className="" alt="exit"/>
+                      <Image src={exit} priority className="" alt="exit" />
                       <button onClick={logout}>Log Out</button>
                     </li>
                   </ul>

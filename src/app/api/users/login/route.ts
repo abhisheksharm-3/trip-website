@@ -14,7 +14,6 @@ export async function POST(request: NextRequest) {
     //checkif user exists
 
     const user = await User.findOne({ email });
-    
 
     //check password validation
     const validPassword = await bcryptjs.compare(password, user.password);
@@ -24,6 +23,9 @@ export async function POST(request: NextRequest) {
     if (!user) {
       return NextResponse.json({ error: "User doesnt exist" }, { status: 400 });
     }
+
+    user.lastLogin = new Date();
+    await user.save();
 
     //create token data
     const tokenData = {

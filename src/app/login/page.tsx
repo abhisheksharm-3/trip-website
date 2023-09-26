@@ -25,7 +25,6 @@ const Login = () => {
         email: email,
         password: password,
       };
-      console.log(userToLogin)
       const response = await axios.post("/api/users/login", userToLogin);
       toast.success("Login successful! You're in! 🚀");
       router.push("/profile");
