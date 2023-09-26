@@ -7,7 +7,7 @@ import toast from "react-hot-toast";
 import UpcomingTrip from "../components/UpcomingTrips/page";
 
 const Profile = () => {
-  const [userData, setUserData] = useState(null);
+  const [userData, setUserData] = useState(null as any);
   const [error, setError] = useState(null);
 
   useEffect(() => {
