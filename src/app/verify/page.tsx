@@ -30,7 +30,7 @@ export default function VerifyEmailPage() {
     if (token.length > 0) {
       verifyUserEmail();
     }
-  }, [token]);
+  }, [token, verifyUserEmail]);
 
   return (
     <div style={{ backgroundImage: "url('/images/homepage-main.jpeg')" }} className="bg-cover bg-center bg-no-repeat overflow-x-hidden">
