@@ -1,11 +1,11 @@
 "use client";
 import React from "react";
 import Image from "next/image";
-import logo from "../../../../public/images/logo.png";
-import woman from "../../../../public/images/woman-avatar.svg";
-import menu from "../../../../public/images/menu-triangle.svg";
-import gear from "../../../../public/images/gear.svg";
-import exit from "../../../../public/images/exit.svg";
+import logo from "../../../public/images/logo.png";
+import woman from "../../../public/images/woman-avatar.svg";
+import menu from "../../../public/images/menu-triangle.svg";
+import gear from "../../../public/images/gear.svg";
+import exit from "../../../public/images/exit.svg";
 import Link from "next/link";
 import axios from "axios";
 import toast from "react-hot-toast";

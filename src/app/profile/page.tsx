@@ -1,13 +1,14 @@
 "use client";
 import React, { useEffect, useState } from "react";
-import LastLoginInfo from "../components/LastLogin/page";
+import LastLoginInfo from "../../components/LastLogin/page";
 import axios from "axios";
-import NavbarLoggedIn from "../components/Navbar-LoggedIn/page";
+import NavbarLoggedIn from "../../components/Navbar-LoggedIn/page";
 import toast from "react-hot-toast";
-import UpcomingTrip from "../components/UpcomingTrips/page";
+import UpcomingTrip from "../../components/UpcomingTrips/page";
 
 const Profile = () => {
   const [userData, setUserData] = useState(null as any);
+  const [lastLogin, setLastLogin] = useState(null as any)
   const [error, setError] = useState(null);
 
   useEffect(() => {
@@ -15,6 +16,7 @@ const Profile = () => {
       try {
         const response = await axios.post("/api/users/profile");
         setUserData(response.data.user);
+        setLastLogin(response.data.lastLogin);
       } catch (error: any) {
         setError(error);
         toast.error(`Error fetching user data: ${error.message}`);
@@ -36,7 +38,7 @@ const Profile = () => {
             </span>
           </h1>
           <div className="flex gap-16">
-          <LastLoginInfo lastLoginTime={userData.lastLogin} />
+          <LastLoginInfo lastLoginTime={lastLogin} />
           <UpcomingTrip isAdmin ={userData.isAdmin} />
           </div>
         </div>

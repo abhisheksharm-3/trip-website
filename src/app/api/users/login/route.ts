@@ -4,7 +4,6 @@ import { NextRequest, NextResponse } from "next/server";
 import bcryptjs from "bcryptjs";
 import jwt from "jsonwebtoken";
 
-
 connect();
 
 export async function POST(request: NextRequest) {
@@ -25,13 +24,13 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: "User doesnt exist" }, { status: 400 });
     }
 
-    user.lastLogin = new Date();
-    await user.save();
-
     //create token data
     const tokenData = {
       id: user._id,
+      lastLogin: user.lastLogin,
     };
+    user.lastLogin = new Date();
+    await user.save();
     //create token
     const token = await jwt.sign(tokenData, process.env.TOKEN_SECRET!, {
       expiresIn: "3d",

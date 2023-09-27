@@ -1,6 +1,6 @@
 import React from 'react';
 
-import padlock from "../../../../public/images/padlock.svg"
+import padlock from "../../../public/images/padlock.svg"
 import Image from 'next/image';
 
 const LastLoginInfo = ({ lastLoginTime }: any) => {

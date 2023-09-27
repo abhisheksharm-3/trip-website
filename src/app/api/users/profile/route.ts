@@ -21,12 +21,13 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ message: "Invalid token" }, { status: 400 });
     }
     const userId = decodedToken.id;
+    const lastLogin = decodedToken.lastLogin;
     const user = await User.findById(userId);
     if (!user) {
       return NextResponse.json({ message: "User not found" });
     }
 
-    return NextResponse.json({ user }, { status: 200 });
+    return NextResponse.json({ user, lastLogin }, { status: 200 });
   } catch (error: any) {
     return NextResponse.json({ error: error.message }, { status: 500 });
   }

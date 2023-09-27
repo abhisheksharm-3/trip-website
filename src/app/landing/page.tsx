@@ -1,6 +1,6 @@
 import React from "react";
-import Navbar from "@/app/components/Navbar/page";
-import HeaderMain from "@/app/components/HeaderMain/page";
+import Navbar from "@/components/Navbar/page";
+import HeaderMain from "@/components/HeaderMain/page";
 //import Image from 'next/image'
 
 const LandingPage = () => {

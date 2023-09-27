@@ -1,6 +1,6 @@
 import React from "react";
 import Image from "next/image";
-import construction from "../../../../public/images/construction.svg";
+import construction from "../../../public/images/construction.svg";
 import NavbarLoggedIn from "../Navbar-LoggedIn/page";
 
 const ConstructionPage = () => {

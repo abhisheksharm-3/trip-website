@@ -1,7 +1,7 @@
 import React from "react";
 import Image from "next/image";
-import arrow from "../../../../public/images/arrow-right.svg";
-import plus from "../../../../public/images/plus.svg"
+import arrow from "../../../public/images/arrow-right.svg";
+import plus from "../../../public/images/plus.svg"
 
 const UpcomingTrip = ({ isAdmin }: any) => {
   const showAddTripButton = isAdmin;

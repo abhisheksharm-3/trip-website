@@ -2,7 +2,7 @@
 import axios from "axios";
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
-import Navbar from "../components/Navbar/page";
+import Navbar from "../../components/Navbar/page";
 
 export default function VerifyEmailPage() {
   const [token, setToken] = useState("");
@@ -30,7 +30,7 @@ export default function VerifyEmailPage() {
     if (token.length > 0) {
       verifyUserEmail();
     }
-  }, [token, verifyUserEmail]);
+  }, [token]);
 
   return (
     <div style={{ backgroundImage: "url('/images/homepage-main.jpeg')" }} className="bg-cover bg-center bg-no-repeat overflow-x-hidden">
