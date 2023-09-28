@@ -27,7 +27,7 @@ const Profile = () => {
   }, []);
 
   return (
-    <div className="bg-[url('/images/profilebg-image.jpg')] bg-cover bg-no-repeat bg-center w-screen h-screen">
+    <div className="bg-[url('/images/profilebg-image.jpg')] bg-cover bg-repeat bg-center w-screen h-screen">
       <NavbarLoggedIn />
       {userData ? (
         <div className="text-white px-6 lg:px-28">
@@ -37,7 +37,7 @@ const Profile = () => {
               {(userData as { name: string } | null)?.name ?? "User"}!
             </span>
           </h1>
-          <div className="flex gap-16 flex-col items-center justify-center sm:justify-start sm:flex-row px-4">
+          <div className="flex gap-9 xs:gap-16 flex-col items-center justify-center sm:justify-start sm:flex-row px-4">
           <LastLoginInfo lastLoginTime={lastLogin} />
           <UpcomingTrip isAdmin ={userData.isAdmin} />
           </div>
