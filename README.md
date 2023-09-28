@@ -1,2 +1,2 @@
-[![CodeFactor](https://www.codefactor.io/repository/github/abhisheksharm-3/trip-talkies/badge)](https://www.codefactor.io/repository/github/abhisheksharm-3/trip-talkies)
+[![CodeFactor](https://www.codefactor.io/repository/github/abhisheksharm-3/trip-website/badge)](https://www.codefactor.io/repository/github/abhisheksharm-3/trip-website)
 ### Design Credits: https://www.figma.com/community/file/998898383271098535
