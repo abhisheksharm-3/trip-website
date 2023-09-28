@@ -30,14 +30,14 @@ const Profile = () => {
     <div className="bg-[url('/images/profilebg-image.jpg')] bg-cover bg-no-repeat bg-center w-screen h-screen">
       <NavbarLoggedIn />
       {userData ? (
-        <div className="text-white px-28">
-          <h1 className="text-[32px] font-medium leading-[70px]">
+        <div className="text-white px-6 lg:px-28">
+          <h1 className="text-[32px] font-medium leading-[55px] sm:leading-[70px]">
             Welcome back, <br />{" "}
-            <span className="text-5xl font-extrabold">
+            <span className="text-4xl sm:text-5xl font-bold sm:font-extrabold">
               {(userData as { name: string } | null)?.name ?? "User"}!
             </span>
           </h1>
-          <div className="flex gap-16">
+          <div className="flex gap-16 flex-col items-center justify-center sm:justify-start sm:flex-row px-4">
           <LastLoginInfo lastLoginTime={lastLogin} />
           <UpcomingTrip isAdmin ={userData.isAdmin} />
           </div>

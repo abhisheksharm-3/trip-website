@@ -62,7 +62,7 @@ const Navbar = () => {
         </div>
 
         {toggleMenu && (
-          <div className="fixed top-0 left-0 w-full h-full bg-[url('/images/homepage-main.jpeg')] bg-cover bg-no-repeat z-50">
+          <div className="fixed top-0 left-0 w-full h-full bg-black bg-opacity-50 backdrop-blur-md bg-cover bg-no-repeat z-50">
             <div className="flex flex-col items-start h-full ease-in duration-500 lg:hidden bg-black bg-opacity-60">
               <div className="py-[14px]">
                 <Image src={logo} alt="logo" className="w-52 mx-5 my-5" />

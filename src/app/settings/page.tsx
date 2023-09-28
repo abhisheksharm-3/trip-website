@@ -57,18 +57,18 @@ const Settings = () => {
         <div className="flex flex-col items-center justify-center">
           <h1 className="text-[#acacac] font-bold text-3xl">Settings</h1>
           <hr />
-          <div className="flex gap-6 items-center justify-center">
+          <div className="flex gap-8 mx-6 items-center justify-center">
             <div className="flex flex-col gap-2">
-              <h3 className="text-lg font-semibold text-white">
+              <h3 className="text-base sm:text-lg font-semibold text-white">
                 Delete Your Account
               </h3>
-              <p className="font-medium text-base text-[#acacac]">
+              <p className="font-medium text-sm sm:text-base text-[#acacac]">
                 Delete your account and all account data
               </p>
             </div>
             <button
               onClick={handleOpenPopup} // Open the confirmation dialog
-              className="bg-red-500 hover:bg-red-800 ease-in-out duration-500 rounded-lg text-center text-white text-sm font-semibold py-2 px-5"
+              className="bg-red-500 hover:bg-red-800 ease-in-out duration-500 rounded-lg text-center text-white text-xs sm:text-sm font-semibold py-2 px-5"
             >
               Delete Account
             </button>
@@ -86,7 +86,7 @@ const Settings = () => {
             >
               &times;
             </button>
-            <h2 className="text-2xl font-extrabold pt-8 text-center">
+            <h2 className="text-2xl font-extrabold pt-8 text-center text-white">
               Are You Sure?
             </h2>
             <p className="w-72 text-center text-neutral-500 dark:text-neutral-400 text-sm font-normal pt-4">

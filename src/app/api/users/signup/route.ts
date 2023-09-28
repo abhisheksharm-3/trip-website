@@ -30,6 +30,7 @@ export async function POST(request: NextRequest) {
       email,
       password: hashedPassword,
     });
+    newUser.lastLogin = new Date();
 
 
     const savedUser = await newUser.save();

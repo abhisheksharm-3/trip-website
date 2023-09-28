@@ -10,7 +10,7 @@ const LastLoginInfo = ({ lastLoginTime }: any) => {
   const formattedDate = dateObject.toLocaleDateString();
 
   return (
-    <div className="relative flex flex-col gap-5 max-w-max items-center justify-center p-12 bg-blue-300 rounded-xl bg-clip-padding backdrop-filter backdrop-blur-sm bg-opacity-60 ">
+    <div className="relative flex flex-col gap-5 w-full sm:max-w-max items-center justify-center p-12 bg-blue-300 rounded-xl bg-clip-padding backdrop-filter backdrop-blur-sm bg-opacity-60 ">
       <Image className='absolute top-0 right-0' src={padlock} alt="lock"/>
       <h3 className='text-sm font-semibold'>Last Login</h3>
       <div className="flex items-center justify-center flex-col gap-2">

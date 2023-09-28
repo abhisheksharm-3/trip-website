@@ -41,9 +41,6 @@ const NavbarLoggedIn = () => {
               <Link href="/profile">Home</Link>
             </li>
             <li className="hover:text-gray-300 duration-500 ease-in-out text-lg font-sans">
-              <Link href="/about">About</Link>
-            </li>
-            <li className="hover:text-gray-300 duration-500 ease-in-out text-lg font-sans">
               <Link href="/suggestion">Suggest a Place</Link>
             </li>
             <li className="hover:text-gray-300 duration-500 ease-in-out text-lg font-sans">
@@ -110,33 +107,69 @@ const NavbarLoggedIn = () => {
         </div>
 
         {toggleMenu && (
-          <div className="fixed top-0 left-0 w-full h-full bg-[url('/images/profilebg-image.jpg')] bg-cover bg-no-repeat z-50">
+          <div className="fixed top-0 left-0 w-full h-full bg-black bg-opacity-50 backdrop-blur-md bg-cover bg-no-repeat z-50">
             <div className="flex flex-col items-start h-full ease-in duration-500 lg:hidden bg-black bg-opacity-60">
-              <div className="py-[14px]">
-                <Image src={logo} alt="logo" className="w-52 mx-5 my-5" />
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  strokeWidth={2.5}
-                  stroke="currentColor"
-                  className="w-6 h-6 cursor-pointer absolute top-5 right-5 hover:text-black ease-in duration-400 text-white my-5"
-                  onClick={() => setToggleMenu(false)}
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M6 18L18 6M6 6l12 12"
-                  />
-                </svg>
+              <div className="py-10 flex items-center justify-between w-full px-4">
+                <div className="flex justify-between">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    strokeWidth={2.5}
+                    stroke="currentColor"
+                    className="w-6 h-6 cursor-pointer absolute hover:text-black ease-in duration-400 text-white my-2"
+                    onClick={() => setToggleMenu(false)}
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      d="M6 18L18 6M6 6l12 12"
+                    />
+                  </svg>
+                  <Image src={logo} alt="logo" className="w-52 mx-10" />
+                </div>
+                <div className=" flex items-end justify-center flex-col">
+                  <li
+                    onClick={openDropdown}
+                    className="hover:text-gray-300 duration-500 ease-in-out text-lg font-sans flex cursor-pointer"
+                  >
+                    <Link href="">
+                      <Image src={woman} priority className="w-[80%]" alt="Logo" />
+                    </Link>
+                    <Image
+                      src={menu}
+                      priority
+                      className="ease-in-out duration-300"
+                      style={{ transform: `rotate(${triangleRotation}deg)` }}
+                      alt="menu"
+                    />
+                  </li>
+                  {dropdownMenu && (
+                    <div className=" absolute bg-white rounded-lg mt-44">
+                      <Image
+                        src={menu}
+                        priority
+                        className="ease-in-out duration-300 rotate-180 translate-x-[139px] -translate-y-2"
+                        alt="menu"
+                      />
+                      <ul className="py-3 px-4 flex flex-col items-center justify-center gap-3">
+                        <li className="hover:bg-gray-200 cursor-pointer flex gap-16 rounded-lg p-2 text-center text-black">
+                          <Image src={gear} priority className="" alt="gear" />
+                          <Link href="/settings">Settings</Link>
+                        </li>
+                        <li className="hover:bg-gray-200 cursor-pointer flex gap-16 rounded-lg p-2 text-center text-black">
+                          <Image src={exit} priority className="" alt="exit" />
+                          <button onClick={logout}>Log Out</button>
+                        </li>
+                      </ul>
+                    </div>
+                  )}
+                </div>
               </div>
 
               <ul className="flex flex-col items-center justify-center w-screen h-screen gap-12 text-white ">
                 <li className="hover:text-gray-300 hover:underline duration-500 ease-in-out text-2xl font-bold font-sans">
                   <Link href="/">Home</Link>
-                </li>
-                <li className="hover:text-gray-300 hover:underline duration-500 ease-in-out text-2xl font-bold font-sans">
-                  <Link href="/about">About</Link>
                 </li>
                 <li className="hover:text-gray-300 hover:underline duration-500 ease-in-out text-2xl font-bold font-sans">
                   <Link href="/suggestion">Suggest a Place</Link>
