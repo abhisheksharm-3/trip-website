@@ -27,7 +27,7 @@ const Profile = () => {
   }, []);
 
   return (
-    <div className="bg-[url('/images/profilebg-image.jpg')] bg-cover bg-repeat bg-center w-screen h-screen">
+    <div className="bg-[url('/images/profilebg-image.jpg')] bg-cover bg-repeat  w-screen h-screen">
       <NavbarLoggedIn />
       {userData ? (
         <div className="text-white px-6 lg:px-28">

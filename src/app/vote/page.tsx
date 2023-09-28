@@ -1,9 +1,12 @@
+import NavbarLoggedIn from '@/components/Navbar-LoggedIn/page'
 import React from 'react'
-import ConstructionPage from '../../components/ConstructionPage/page'
 
 const Vote = () => {
   return (
-    <div><ConstructionPage /></div>
+    <div className="h-screen w-screen bg-[url('/images/bg-6.jpg')] bg-cover bg-center bg-no-repeat">
+      <NavbarLoggedIn />
+
+    </div>
   )
 }
 
