@@ -40,6 +40,14 @@ const placeSchema = new mongoose.Schema(
             type: Number,
             default: 0,
         },
+        isAccepted: {
+            type: Boolean,
+            default: false,
+        },
+        isRejected: {
+            type: Boolean,
+            default: false,
+        },
 
     }
 )
