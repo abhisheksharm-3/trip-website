@@ -23,9 +23,9 @@ const placeSchema = new mongoose.Schema(
             required: [true, "Please Provide a Budget"],
             min: [2, "Budget Should be more than 99"]
         },
-        itineary: {
+        itinerary: {
             type: String,
-            required: [true, "Please Provide Itineary of the Destination"],
+            required: [true, "Please Provide itinerary of the Destination"],
             minlength: [550, "Description should be atleast 550 chars long"]
         },
         email: {

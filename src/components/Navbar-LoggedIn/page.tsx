@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import logo from "../../../public/images/logo.png";
 import woman from "../../../public/images/woman-avatar.svg";
@@ -13,6 +13,19 @@ import { useRouter } from "next/navigation";
 
 const NavbarLoggedIn = () => {
   const router = useRouter();
+  const [admin, setAdmin] = useState(false);
+  useEffect(() => {
+    const getUserData = async () => {
+      try {
+        const response = await axios.post("/api/users/profile");
+        setAdmin(response.data.user.isAdmin);
+      } catch (error: any) {
+        toast.error(`Error fetching user data: ${error.message}`);
+      }
+    };
+
+    getUserData();
+  }, []);
   const [toggleMenu, setToggleMenu] = React.useState(false);
   const [dropdownMenu, setDropdownMwnu] = React.useState(false);
   const [triangleRotation, setTriangleRotation] = React.useState(0);
@@ -46,6 +59,11 @@ const NavbarLoggedIn = () => {
             <li className="hover:text-gray-300 duration-500 ease-in-out text-lg font-sans">
               <Link href="/vote">Vote</Link>
             </li>
+            {admin && (
+              <li className="hover:text-gray-300 duration-500 ease-in-out text-lg font-sans">
+                <Link href="/approve-places">Approve Places</Link>
+              </li>
+            )}
             <div className=" flex items-end justify-center flex-col">
               <li
                 onClick={openDropdown}
@@ -134,7 +152,12 @@ const NavbarLoggedIn = () => {
                     className="hover:text-gray-300 duration-500 ease-in-out text-lg font-sans flex cursor-pointer"
                   >
                     <Link href="">
-                      <Image src={woman} priority className="w-[80%]" alt="Logo" />
+                      <Image
+                        src={woman}
+                        priority
+                        className="w-[80%]"
+                        alt="Logo"
+                      />
                     </Link>
                     <Image
                       src={menu}
@@ -177,6 +200,12 @@ const NavbarLoggedIn = () => {
                 <li className="hover:text-gray-300 hover:underline duration-500 ease-in-out text-2xl font-bold font-sans">
                   <Link href="/vote">Vote</Link>
                 </li>
+                {admin && (
+                  <li className="hover:text-gray-300 hover:underline duration-500 ease-in-out text-2xl font-bold font-sans">
+                    <Link href="/approve-places">Approve Places</Link>
+                  </li>
+                  
+                )}
               </ul>
             </div>
           </div>

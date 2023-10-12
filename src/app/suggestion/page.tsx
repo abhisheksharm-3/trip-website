@@ -1,9 +1,14 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import NavbarLoggedIn from "@/components/Navbar-LoggedIn/page";
 import Image from "next/image";
+import axios from "axios";
+import toast from "react-hot-toast";
+import { useRouter } from "next/navigation";
+
 
 const Suggestion = () => {
+  const router = useRouter();
   const [formData, setFormData] = useState({
     name: "",
     description: "",
@@ -40,6 +45,20 @@ const Suggestion = () => {
   const handlePreviousStep = () => {
     setCurrentStep((prevStep) => prevStep - 1);
   };
+  //TODO:Improve UX
+  useEffect(() => {
+    const getUserData = async () => {
+      try {
+        const response = await axios.post("/api/users/profile");
+        const userEmail = response.data.user.email;
+        setFormData({ ...formData, email: userEmail });
+      } catch (error: any) {
+        toast.error(`Error fetching user data: ${error.message}, Taking you back to Profile Home!`);
+        router.push('/profile')
+      }
+    };
+    getUserData();
+  });
 
   const validateForm = (step: any) => {
     let isValid = true;
@@ -95,14 +114,30 @@ const Suggestion = () => {
     return isValid;
   };
 
-  const handleSubmit = (event: any) => {
+  const handleSubmit = async (event: any) => {
     event.preventDefault();
-    // Simulate a submission for demonstration purposes
-    // In your real application, submit the form data to your server here.
-    setCurrentStep((prevStep) => prevStep + 1)
-    setTimeout(() => {
-      setSubmissionStatus("approved"); // Set submission status to "approved" after a delay
-    }, 2000);
+
+    if (validateForm(currentStep)) {
+      try {
+        // Send the form data to the backend API using Axios
+
+        const response = await axios.post("/api/users/suggestion", formData);
+        console.log(response);
+
+        if (response.status === 200) {
+          // Form submitted successfully
+          setCurrentStep((prevStep) => prevStep + 1);
+          setTimeout(() => {
+            setSubmissionStatus("approved");
+          }, 2000);
+        } else {
+          // Handle form submission errors here
+          console.error("Form submission error:", response.data);
+        }
+      } catch (error) {
+        console.error("An error occurred while processing the form:", error);
+      }
+    }
   };
 
   const handleInputKeyDown = (event: any) => {
@@ -110,7 +145,7 @@ const Suggestion = () => {
       handleNextStep();
     }
   };
-
+  const userEmailAvailable = formData.email;
   const renderStep = () => {
     switch (currentStep) {
       case 1:
@@ -137,6 +172,7 @@ const Suggestion = () => {
             <button
               type="button"
               onClick={handleNextStep}
+              disabled={!userEmailAvailable}
               className="w-full h-12 bg-gradient-to-r from-blue-500 to-purple-500 hover:bg-gradient-to-r hover:from-blue-600 hover:to-purple-600 text-white font-bold py-2 px-4 rounded-md hover:shadow-md transition focus:outline-none ease-in-out duration-500 animate-pulse"
             >
               Next
@@ -175,6 +211,7 @@ const Suggestion = () => {
               </button>
               <button
                 type="button"
+                disabled={!userEmailAvailable}
                 onClick={handleNextStep}
                 className="w-1/2 h-12 bg-gradient-to-r from-blue-500 to-purple-500 hover:bg-gradient-to-r hover:from-blue-600 hover:to-purple-600 text-white font-bold py-2 px-4 rounded-md hover:shadow-md transition focus:outline-none ease-in-out duration-500 animate-pulse"
               >
@@ -197,7 +234,7 @@ const Suggestion = () => {
               value={formData.dateRange}
               onChange={handleInputChange}
               onKeyDown={handleInputKeyDown}
-              className={`w-full h-12 border ${
+              className={`w-full h-12 border bg-[#2f3542] text-white ${
                 errors.dateRange ? "border-red-500" : "border-gray-300"
               } px-3 rounded-md hover:border-blue-500 transition duration-300 focus:outline-none mb-4`}
               required
@@ -230,6 +267,7 @@ const Suggestion = () => {
               </button>
               <button
                 type="button"
+                disabled={!userEmailAvailable}
                 onClick={handleNextStep}
                 className="w-1/2 h-12 bg-gradient-to-r from-blue-500 to-purple-500 hover:bg-gradient-to-r hover:from-blue-600 hover:to-purple-600 text-white font-bold py-2 px-4 rounded-md hover:shadow-md transition focus:outline-none ease-in-out duration-500 animate-pulse"
               >
@@ -263,6 +301,7 @@ const Suggestion = () => {
             <div className="flex justify-between gap-16">
               <button
                 type="button"
+                disabled={!userEmailAvailable}
                 onClick={handlePreviousStep}
                 className="w-1/2 h-12 bg-gray-400 hover:bg-gray-500 text-white font-bold py-2 px-4 rounded-md hover:shadow-md transition duration-300 focus:outline-none"
               >
@@ -281,13 +320,41 @@ const Suggestion = () => {
 
       case 5:
         if (submissionStatus === "approved") {
+          toast.success(
+            "🎉 Your destination has been submitted for approval!",
+            {
+              style: {
+                background: "green",
+                color: "white",
+              },
+              icon: "🚀", // You can use any emoji or icon you like
+            }
+          );
           return (
+            //TODO: Add a Confetti
             <div className="text-center text-green-500 mt-4">
-              <Image src="/videoBg/completion.gif" alt="completed form" width={540} height={360}/>
-              <p>Your destination has been submitted for approval.</p>
+              <Image
+                src="/videoBg/completion.gif"
+                alt="completed form"
+                width={540}
+                height={360}
+              />
+              <div className="mt-4">
+                <p className="text-2xl font-bold text-white">
+                  Congratulations!
+                </p>
+                <p className="text-lg text-green-600 font-semibold mt-2">
+                  Your destination has been submitted for approval. Contact your
+                  Trip Administrator for further action.
+                </p>
+                <button className="bg-blue-500 hover:bg-blue-600 ease-in-out duration-500 text-white font-semibold py-2 px-4 rounded-md mt-4">
+                  Share on Social Media
+                </button>
+              </div>
             </div>
           );
         }
+
         break;
 
       default:
@@ -310,7 +377,7 @@ const Suggestion = () => {
       </div>
       <div className="flex items-center justify-center h-[70vh]">
         <div className="relative">
-          <div className="bg-opacity-80 backdrop-blur-lg p-4 sm:p-8 rounded-md shadow-lg max-w-md lg:w-[800px] mx-auto relative z-10 transform transition duration-500 ease-in-out">
+          <div className="neuro bg-opacity-80 backdrop-blur-lg p-4 sm:p-8 rounded-md shadow-lg max-w-md lg:w-[800px] mx-auto relative z-0 transform transition duration-500 ease-in-out">
             <form onSubmit={handleSubmit}>{renderStep()}</form>
           </div>
         </div>
