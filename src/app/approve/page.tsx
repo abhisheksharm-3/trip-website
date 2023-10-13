@@ -55,7 +55,7 @@ const Approval = () => {
 
   const handleAccept = async (item: Place) => {
     try {
-      await axios.post(`/api/accept/${item._id}`);
+      // await axios.post(`/api/accept/${item._id}`);
       setApprovalList((prevList) =>
         prevList.filter((i) => i._id !== item._id)
       );
@@ -66,7 +66,7 @@ const Approval = () => {
 
   const handleReject = async (item: Place) => {
     try {
-      await axios.post(`/api/reject/${item._id}`);
+      // await axios.post(`/api/reject/${item._id}`);
       setApprovalList((prevList) =>
         prevList.filter((i) => i._id !== item._id)
       );
