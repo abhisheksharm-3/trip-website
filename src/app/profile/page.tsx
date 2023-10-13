@@ -40,6 +40,19 @@ const Profile = () => {
           <div className="flex gap-9 xs:gap-16 flex-col items-center justify-center sm:justify-start sm:flex-row px-4">
           <LastLoginInfo lastLoginTime={lastLogin} />
           <UpcomingTrip isAdmin ={userData.isAdmin} />
+          {/* <div className="text-center mt-4">
+        <p className="text-lg text-gray-300">
+          Get weather updates from our sister service:
+        </p>
+        <a
+          href="https://overcastly.netlify.app/"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="text-blue-500 text-lg font-semibold hover:underline"
+        >
+          Visit Overcastly
+        </a>
+      </div> */}
           </div>
         </div>
       ) : error ? (
