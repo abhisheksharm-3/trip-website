@@ -48,6 +48,9 @@ const placeSchema = new mongoose.Schema(
             type: Boolean,
             default: false,
         },
+        placeImage: {
+            type: String,
+        },
 
     }
 )

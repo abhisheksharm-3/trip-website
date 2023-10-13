@@ -2,6 +2,7 @@ import React from "react";
 import Image from "next/image";
 import arrow from "../../../public/images/arrow-right.svg";
 import plus from "../../../public/images/plus.svg"
+import Link from "next/link"
 
 const UpcomingTrip = ({ isAdmin }: any) => {
   const showAddTripButton = isAdmin;
@@ -12,10 +13,11 @@ const UpcomingTrip = ({ isAdmin }: any) => {
         <h3 className="text-sm font-bold uppercase cursor-pointer">
           Upcoming Trips
         </h3>
+        <Link href="/trips">
         <div className="flex items-center justify-center cursor-pointer">
           <h3 className="text-[13px] font-medium hover:text-gray-300 ease-in-out duration-500">See More</h3>
           <Image src={arrow} alt="arrow" />
-        </div>
+        </div></Link>
       </div>
      
       <div className="relative flex flex-col gap-5 w-full sm:max-w-max items-center justify-center sm:px-24 py-8 bg-teal-100 rounded-xl bg-clip-padding backdrop-filter backdrop-blur-sm bg-opacity-60"> <p className="text-base font-semibold">No trips scheduled.</p>

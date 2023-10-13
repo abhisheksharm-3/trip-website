@@ -61,7 +61,7 @@ const NavbarLoggedIn = () => {
             </li>
             {admin && (
               <li className="hover:text-gray-300 duration-500 ease-in-out text-lg font-sans">
-                <Link href="/approve-places">Approve Places</Link>
+                <Link href="/approve">Approve Places</Link>
               </li>
             )}
             <div className=" flex items-end justify-center flex-col">
@@ -202,7 +202,7 @@ const NavbarLoggedIn = () => {
                 </li>
                 {admin && (
                   <li className="hover:text-gray-300 hover:underline duration-500 ease-in-out text-2xl font-bold font-sans">
-                    <Link href="/approve-places">Approve Places</Link>
+                    <Link href="/approve">Approve Places</Link>
                   </li>
                   
                 )}

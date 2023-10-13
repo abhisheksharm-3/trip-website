@@ -6,11 +6,11 @@ import axios from "axios";
 import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
 
-
 const Suggestion = () => {
   const router = useRouter();
   const [formData, setFormData] = useState({
     name: "",
+    link: "",
     description: "",
     dateRange: 0,
     budget: 0,
@@ -22,6 +22,7 @@ const Suggestion = () => {
 
   const [errors, setErrors] = useState({
     name: "",
+    link: "",
     description: "",
     dateRange: "",
     budget: "",
@@ -51,12 +52,18 @@ const Suggestion = () => {
       try {
         const response = await axios.post("/api/users/profile");
         const userEmail = response.data.user.email;
-        setFormData({ ...formData, email: userEmail });
+        setFormData((prevData) => ({
+          ...prevData,
+          email: userEmail,
+        }));
       } catch (error: any) {
-        toast.error(`Error fetching user data: ${error.message}, Taking you back to Profile Home!`);
-        router.push('/profile')
+        toast.error(
+          `Error fetching user data: ${error.message}, Taking you back to Profile Home!`
+        );
+        router.push("/profile");
       }
     };
+
     getUserData();
   });
 
@@ -64,6 +71,7 @@ const Suggestion = () => {
     let isValid = true;
     const newErrors = {
       name: "",
+      link: "",
       description: "",
       dateRange: "",
       budget: "",
@@ -75,6 +83,11 @@ const Suggestion = () => {
       case 1:
         if (formData.name.length < 2) {
           newErrors.name = "Name must be at least 2 characters long";
+          isValid = false;
+        }
+
+        if (formData.link.trim() === "") {
+          newErrors.link = "Link is required";
           isValid = false;
         }
         break;
@@ -166,8 +179,26 @@ const Suggestion = () => {
               } px-3 rounded-md hover:border-blue-500 transition duration-300 focus:outline-none mb-4`}
               required
             />
+            <label className="block text-white font-bold text-lg mb-2">
+              Link to Beautiful Image of your Destination
+            </label>
+            <input
+              type="text"
+              placeholder="E.g., Your magical portal to Narnia 🪄"
+              name="link"
+              value={formData.link}
+              onChange={handleInputChange}
+              onKeyDown={handleInputKeyDown}
+              className={`w-full h-12 border bg-[#2f3542] text-white ${
+                errors.link ? "border-red-500" : "border-gray-300"
+              } px-3 rounded-md hover:border-blue-500 transition duration-300 focus:outline-none mb-4`}
+              required
+            />
             {errors.name && (
               <p className="text-red-500 text-sm mb-2">{errors.name}</p>
+            )}
+            {errors.link && (
+              <p className="text-red-500 text-sm mb-2">{errors.link}</p>
             )}
             <button
               type="button"
