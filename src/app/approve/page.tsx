@@ -55,7 +55,7 @@ const Approval = () => {
 
   const handleAccept = async (item: Place) => {
     try {
-      // await axios.post(`/api/accept/${item._id}`);
+      await axios.post(`/api/users/grantApproval`, { itemId: item._id, status: "accept" });
       setApprovalList((prevList) =>
         prevList.filter((i) => i._id !== item._id)
       );
@@ -66,14 +66,14 @@ const Approval = () => {
 
   const handleReject = async (item: Place) => {
     try {
-      // await axios.post(`/api/reject/${item._id}`);
+      await axios.post(`/api/users/grantApproval`, { itemId: item._id, status: "reject" });
       setApprovalList((prevList) =>
         prevList.filter((i) => i._id !== item._id)
       );
     } catch (error: any) {
       toast.error(`Error rejecting the item: ${error.message}`);
     }
-  };
+  }
 
   const openDetailsPopup = (item: Place) => {
     setSelectedItem(item);
