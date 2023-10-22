@@ -22,7 +22,6 @@ const Settings = () => {
       const profileResponse = await axios.post("/api/users/profile");
       const profileEmail = profileResponse.data.user.email;
 
-
       if (confirmationEmail === profileEmail) {
         // Email matches, proceed with deletion
         const response = await axios.post("/api/users/delete");
@@ -33,8 +32,9 @@ const Settings = () => {
           );
           setDeletionMessage("Account deleted successfully! 🎉");
           await axios.get("/api/users/logout");
-          toast.success("You're now free as a bird! 🦜🌟");
+
           router.push("/");
+          toast.success("You're now free as a bird! 🦜🌟");
         } else {
           toast.error("Oops! Your account decided to stay a little longer. 😅");
           setDeletionMessage("Account deletion failed. 😞");
