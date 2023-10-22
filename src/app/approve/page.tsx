@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import toast from "react-hot-toast";
@@ -34,6 +34,10 @@ const Approval = () => {
 
     getUserData();
   }, []);
+  function truncateText(text: string, maxLength: number): string {
+    if (text.length <= maxLength) return text;
+    return text.substr(0, maxLength) + "...";
+  }
 
   useEffect(() => {
     if (user && user.isAdmin) {
@@ -55,10 +59,11 @@ const Approval = () => {
 
   const handleAccept = async (item: Place) => {
     try {
-      await axios.post(`/api/users/grantApproval`, { itemId: item._id, status: "accept" });
-      setApprovalList((prevList) =>
-        prevList.filter((i) => i._id !== item._id)
-      );
+      await axios.post(`/api/users/grantApproval`, {
+        itemId: item._id,
+        status: "accept",
+      });
+      setApprovalList((prevList) => prevList.filter((i) => i._id !== item._id));
     } catch (error: any) {
       toast.error(`Error accepting the item: ${error.message}`);
     }
@@ -66,14 +71,15 @@ const Approval = () => {
 
   const handleReject = async (item: Place) => {
     try {
-      await axios.post(`/api/users/grantApproval`, { itemId: item._id, status: "reject" });
-      setApprovalList((prevList) =>
-        prevList.filter((i) => i._id !== item._id)
-      );
+      await axios.post(`/api/users/grantApproval`, {
+        itemId: item._id,
+        status: "reject",
+      });
+      setApprovalList((prevList) => prevList.filter((i) => i._id !== item._id));
     } catch (error: any) {
       toast.error(`Error rejecting the item: ${error.message}`);
     }
-  }
+  };
 
   const openDetailsPopup = (item: Place) => {
     setSelectedItem(item);
@@ -107,7 +113,9 @@ const Approval = () => {
                 key={item._id}
                 className="bg-white p-2 my-2 rounded-md relative"
               >
-                <h2 className="text-lg font-semibold">{item.name}</h2>
+                <h3 className="text-xl font-bold mb-2">
+                  {truncateText(item.name, 50)}
+                </h3>
                 <p className="text-sm text-gray-700">{item.email}</p>
                 <div className="mt-4 flex justify-between">
                   <button
