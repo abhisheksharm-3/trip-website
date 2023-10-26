@@ -115,7 +115,7 @@ const Vote = () => {
     </div>
     <div className="flex items-center justify-center h-[70vh]">
       <div className="relative">
-        <div className="neuro bg-opacity-80 backdrop-blur-lg p-4 sm:p-8 rounded-md shadow-lg max-w-md lg:w-[800px] mx-auto relative z-0 transform transition duration-500 ease-in-out">
+        <div className="neuro bg-opacity-80 backdrop-blur-lg p-4 sm:p-8 rounded-md shadow-lg max-w-md lg:w-[800px] mx-auto relative z-0 transform transition duration-500 ease-in-out" style={{ maxHeight: '500px', overflowY: 'auto' }}>
           <h2 className="text-center text-3xl font-bold mb-6 text-white">
             Vote for Places
           </h2>
