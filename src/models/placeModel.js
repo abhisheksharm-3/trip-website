@@ -48,6 +48,11 @@ const placeSchema = new mongoose.Schema(
             type: Boolean,
             default: false,
         },
+        voters: [
+            {
+                type: String, // Store user emails as strings
+            },
+        ],
         placeImage: {
             type: String,
         },

@@ -1,5 +1,5 @@
 "use client";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useMemo } from "react";
 import NavbarLoggedIn from "@/components/Navbar-LoggedIn/page";
 import axios from "axios";
 import toast from "react-hot-toast";
@@ -13,6 +13,7 @@ interface Place {
   votesInFavour: number;
   votesAgainst: number;
   itinerary: string;
+  voters: string;
 }
 
 interface Votes {
@@ -31,6 +32,23 @@ const Vote = () => {
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [expandedPlaceId, setExpandedPlaceId] = useState<string | null>(null);
   const [isPopupOpen, setIsPopupOpen] = useState(false);
+  const [userEmail, setUserEmail] = useState("")
+  useEffect(() => {
+    const getUserData = async () => {
+      try {
+        const response = await axios.post("/api/users/profile");
+        const userEmail = response.data.user.email;
+        setUserEmail(userEmail);
+      } catch (error: any) {
+        toast.error(
+          `Error fetching user data: ${error.message}, Taking you back to Profile Home!`
+        );
+        router.push("/profile");
+      }
+    };
+
+    getUserData();
+  });
 
   useEffect(() => {
     const fetchData = async () => {
@@ -67,7 +85,7 @@ const Vote = () => {
       setVotes(newVotes);
 
       axios
-        .post("/api/users/voteChange", { placeId, type })
+        .post("/api/users/voteChange", { placeId, type, userEmail })
         .then((response) => {
           if (response.status === 200) {
             toast.success("Vote submitted!");
@@ -134,12 +152,14 @@ const Vote = () => {
                     <p className="mb-2">Against: {votes[place._id].against}</p>
                   </div>
                   <div className="mt-2">
-                    <button
-                      className="bg-blue-500 hover-bg-blue-600 text-white font-bold py-2 px-4 rounded-md mr-2"
-                      onClick={() => handleVote(place._id, "inFavor")}
-                    >
-                      Vote in Favor
-                    </button>
+                  <button
+  className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-md mr-2"
+  onClick={() => handleVote(place._id, "inFavor")}
+  disabled={place.voters.includes(userEmail)}
+>
+  {place.voters.includes(userEmail) ? "Already Voted" : "Vote in Favor"}
+</button>
+
                     <button
                       className="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded-md"
                       onClick={() => handleVote(place._id, "against")}
