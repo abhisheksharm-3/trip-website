@@ -23,7 +23,7 @@ interface Votes {
   };
 }
 
-const ITEMS_PER_PAGE = 5;
+const ITEMS_PER_PAGE = 6;
 
 const Vote = () => {
   const router = useRouter();
@@ -32,7 +32,7 @@ const Vote = () => {
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [expandedPlaceId, setExpandedPlaceId] = useState<string | null>(null);
   const [isPopupOpen, setIsPopupOpen] = useState(false);
-  const [userEmail, setUserEmail] = useState("")
+  const [userEmail, setUserEmail] = useState("");
   useEffect(() => {
     const getUserData = async () => {
       try {
@@ -114,7 +114,6 @@ const Vote = () => {
   const handleClosePopup = () => {
     setIsPopupOpen(false);
   };
-  
 
   const totalPages = Math.ceil(places.length / ITEMS_PER_PAGE);
   const itemsToShow = places.slice(
@@ -123,103 +122,76 @@ const Vote = () => {
   );
   function truncateText(text: string, maxLength: number): string {
     if (text.length <= maxLength) return text;
-    return text.substr(0, maxLength) + '...';
+    return text.substr(0, maxLength) + "...";
   }
 
   return (
-    <div className="h-screen w-screen overflow-hidden bg-[url('/images/bg-5.jpg')] bg-center bg-cover bg-no-repeat">
-    <div className="z-10 relative">
-      <NavbarLoggedIn />
-    </div>
-    <div className="flex items-center justify-center h-[70vh]">
-      <div className="relative">
-        <div className="neuro bg-opacity-80 backdrop-blur-lg p-4 sm:p-8 rounded-md shadow-lg max-w-md lg:w-[800px] mx-auto relative z-0 transform transition duration-500 ease-in-out" style={{ maxHeight: '500px', overflowY: 'auto' }}>
-          <h2 className="text-center text-3xl font-bold mb-6 text-white">
-            Vote for Places
-          </h2>
+    <div className="h-screen w-screen overflow-hidden bg-[url('/images/bg-1-dark.jpg')] bg-center bg-cover bg-no-repeat brightness-90 relative">
+      <div className="z-10">
+        <NavbarLoggedIn />
+      </div>
+      <div className="flex items-center flex-col justify-between h-[70vh] w-screen absolute">
+        <h1 className="text-2xl md:text-4xl lg:text-5xl font-bold mb-6 text-white text-center">
+          🌟 Vote For Your Favorite Destinations Here! 🌍✈️
+        </h1>
+        <div className="">
           {places.length === 0 ? (
-            <p className="text-white text-center">No places approved by admin yet.</p>
+            <p className="text-white text-center">
+              No places approved by admin yet.
+            </p>
           ) : (
-            <ul>
+            <ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 place-content-center place-items-center">
               {itemsToShow.map((place) => (
                 <li key={place._id} className="mb-4">
                   <div className="text-white">
                     <h3 className="text-xl font-bold mb-2">
-                      {truncateText(place.name, 50)}
+                      {truncateText(place.name, 20)}
                     </h3>
                     <p className="mb-2">Email: {place.email}</p>
                     <p className="mb-2">In Favor: {votes[place._id].inFavor}</p>
                     <p className="mb-2">Against: {votes[place._id].against}</p>
                   </div>
-                  <div className="mt-2">
-                  <button
-  className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-md mr-2"
-  onClick={() => handleVote(place._id, "inFavor")}
-  disabled={place.voters.includes(userEmail)}
->
-  {place.voters.includes(userEmail) ? "Already Voted" : "Vote in Favor"}
-</button>
-
+                  <div className="mt-2 flex flex-col md:flex-row justify-center md:justify-between items-center">
                     <button
-                      className="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded-md"
+                      className={`bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-md mb-2 md:mb-0 md:mr-2 ${place.voters.includes(userEmail) && 'opacity-50 cursor-not-allowed'}`}
+                      onClick={() => handleVote(place._id, "inFavor")}
+                      disabled={place.voters.includes(userEmail)}
+                      aria-label={place.voters.includes(userEmail) ? "Already Voted" : "Vote in Favor"}
+                    >
+                      {place.voters.includes(userEmail) ? "Already Voted" : "Vote in Favor"}
+                    </button>
+  
+                    <button
+                      className="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded-md mb-2 md:mb-0 md:mr-2"
                       onClick={() => handleVote(place._id, "against")}
+                      aria-label="Vote Against"
                     >
                       Vote Against
                     </button>
-                    <button
-                      onClick={() => handleToggleDetails(place)}
-                      className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-md ml-2"
-                    >
-                      Details
-                    </button>
+                    {selectedPlace && (
+                      <button
+                        onClick={() => handleToggleDetails(place)}
+                        className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-md ml-2"
+                      >
+                        Details
+                      </button>
+                    )}
                   </div>
                 </li>
               ))}
             </ul>
           )}
         </div>
+        <p className="text-sm md:text-lg mt-4 text-white text-center">
+          Choose wisely, because these destinations are competing for the title
+          of{" "}
+          <span className="text-red-500 font-bold">
+            &quot;Best Vacation Spot Ever&quot;
+          </span>{" "}
+          🏆 and we always want to set a benchmark.
+        </p>
       </div>
     </div>
-    {isPopupOpen && selectedPlace && (
-  <div className="fixed inset-0 flex items-center justify-center z-50 bg-black bg-opacity-50 backdrop-blur-sm">
-    <div className="bg-white dark:bg-gray-800 p-4 rounded-lg shadow-md w-[350px] relative flex items-center flex-col justify-center">
-      <button
-        className="absolute top-2 right-2 text-gray-300 dark:text-gray-500 hover:text-gray-700 dark:hover:text-gray-300 text-3xl focus:outline-none"
-        onClick={handleClosePopup}
-      >
-        &times;
-      </button>
-      <h2 className="text-2xl font-extrabold pt-8 text-center text-white">
-        Place Details
-      </h2>
-      <div className="w-72 h-52 overflow-y-auto text-center text-neutral-500 dark:text-neutral-400 text-sm font-normal pt-4">
-        <p className="text-xl font-bold mb-2">{selectedPlace.name}</p>
-        <p className="mb-2">Email: {selectedPlace.email}</p>
-        <p className="mb-2">In Favor: {votes[selectedPlace._id].inFavor}</p>
-        <p className="mb-2">Against: {votes[selectedPlace._id].against}</p>
-        <p className="mb-2">Description: {selectedPlace.description}</p>
-        <p className="mb-2">Itinerary: {selectedPlace.itinerary}</p>
-      </div>
-    </div>
-  </div>
-)}
-    <div className="mt-4 flex justify-center">
-      <button
-        onClick={() => setCurrentPage((prevPage) => prevPage - 1)}
-        disabled={currentPage === 1}
-        className="bg-blue-500 text-white p-2 rounded-md mx-2"
-      >
-        Previous Page
-      </button>
-      <button
-        onClick={() => setCurrentPage((prevPage) => prevPage + 1)}
-        disabled={currentPage === totalPages}
-        className="bg-blue-500 text-white p-2 rounded-md mx-2"
-      >
-        Next Page
-      </button>
-    </div>
-  </div>
   );
 };
 
