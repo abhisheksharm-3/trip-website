@@ -18,6 +18,7 @@ export async function POST(request: NextRequest) {
         const {
           name,
           description,
+          link,
           dateRange,
           budget,
           itinerary,
