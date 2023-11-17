@@ -89,7 +89,8 @@ const Vote = () => {
     getUserData();
   }, []);
 
-  const handleVote = (placeId: string, type: "inFavor" | "against") => {
+  const handleVote = (placeId: string, type: "inFavor" | "against", event: React.MouseEvent<HTMLButtonElement>) => {
+    event.stopPropagation();
     if (places.some((place) => place._id === placeId)) {
       const newVotes: Votes = { ...votes };
       if (type === "inFavor") {
@@ -162,31 +163,35 @@ const Vote = () => {
                     <p className="mb-2">Against: {votes[place._id].against}</p>
                   </div>
                   <div className="mt-2 flex flex-col md:flex-row justify-center md:justify-between items-center">
-                    <button
-                      className={`bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-md mb-2 md:mb-0 md:mr-2 ${
-                        place.voters.includes(userEmail) &&
-                        "opacity-50 cursor-not-allowed"
-                      }`}
-                      onClick={() => handleVote(place._id, "inFavor")}
-                      disabled={place.voters.includes(userEmail)}
-                      aria-label={
-                        place.voters.includes(userEmail)
-                          ? "Already Voted"
-                          : "Vote in Favor"
-                      }
-                    >
-                      {place.voters.includes(userEmail)
-                        ? "Already Voted"
-                        : "Vote in Favor"}
-                    </button>
+                  <button
+  className={`bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-md mb-2 md:mb-0 md:mr-2 ${
+    place.voters.includes(userEmail) && "opacity-50 cursor-not-allowed"
+  }`}
+  onClick={(event) => handleVote(place._id, "inFavor", event)}
+  disabled={place.voters.includes(userEmail)}
+  aria-label={
+    place.voters.includes(userEmail)
+      ? "Already Voted"
+      : "Vote in Favor"
+  }
+>
+  {place.voters.includes(userEmail)
+    ? "Already Voted"
+    : "Vote in Favor"}
+</button>
 
-                    <button
-                      className="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded-md mb-2 md:mb-0 md:mr-2"
-                      onClick={() => handleVote(place._id, "against")}
-                      aria-label="Vote Against"
-                    >
-                      Vote Against
-                    </button>
+<button
+  className={`bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded-md mb-2 md:mb-0 md:mr-2 ${
+    place.voters.includes(userEmail) && "opacity-50 cursor-not-allowed"
+  }`}
+  onClick={(event) => handleVote(place._id, "against", event)}
+  aria-label="Vote Against"
+  disabled={place.voters.includes(userEmail)}
+>
+{place.voters.includes(userEmail)
+    ? "Already Voted"
+    : "Vote Against"}
+</button>
                   </div>
                 </li>
               ))}
