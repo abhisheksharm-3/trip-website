@@ -249,13 +249,13 @@ const Vote = () => {
             </div>
             <div>
               <p className="text-gray-500 mb-2 break-all">
-                <strong>Email:</strong> {selectedPlace?.email}
+                <strong>Suggester:</strong> {selectedPlace?.email}
               </p>
               {/* Add more details as needed */}
             </div>
           </ModalBody>
           <ModalFooter className="flex justify-center">
-            <Button color="danger" variant="light" onPress={onClose} className="mr-2">
+            <Button color="danger" variant="ghost" onPress={onClose} className="mr-2">
               Close
             </Button>
           </ModalFooter>
