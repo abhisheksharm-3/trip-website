@@ -1,3 +1,4 @@
+"use client"
 import LandingPage from "./landing/page"
 import { Metadata } from 'next'
 import {NextUIProvider} from "@nextui-org/react";
