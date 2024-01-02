@@ -12,13 +12,14 @@ export async function POST(request: NextRequest) {
 
       // Parse the request body as JSON
       const formData = JSON.parse(reqBody);
+      
 
       if (formData) {
         // Extract the form fields from formData
         const {
           name,
-          description,
           link,
+          description,
           dateRange,
           budget,
           itinerary,
@@ -28,6 +29,7 @@ export async function POST(request: NextRequest) {
         // Create a new Place document in MongoDB
         const newPlace = new Place({
           name,
+          link,
           description,
           dateRange,
           budget,

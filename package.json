@@ -20,8 +20,8 @@
     "axios": "^1.5.0",
     "bcrypt": "^5.1.1",
     "bcryptjs": "^2.4.3",
-    "eslint": "8.49.0",
-    "eslint-config-next": "^13.5.1",
+    "eslint": "^8.56.0",
+    "eslint-config-next": "^14.0.4",
     "font-awesome": "^4.7.0",
     "framer-motion": "^10.16.5",
     "jsonwebtoken": "^9.0.2",
@@ -35,9 +35,9 @@
     "react-dom": "^18.2.0",
     "react-hot-toast": "^2.4.1",
     "reset-css": "^5.0.2",
-    "sharp": "^0.32.6",
+    "sharp": "^0.33.1",
     "styled-jsx": "^5.1.2",
-    "typescript": "5.2.2"
+    "typescript": "^5.3.3"
   },
   "devDependencies": {
     "@types/jsonwebtoken": "^9.0.3",
