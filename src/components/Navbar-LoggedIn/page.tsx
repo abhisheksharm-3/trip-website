@@ -67,6 +67,10 @@ const NavbarLoggedIn = () => {
             <div className=" flex items-end justify-center flex-col">
               <li
                 onClick={openDropdown}
+                onKeyDown={(e) => {
+                  if (e.key === "Enter" || e.key === " ") openDropdown();
+                }}
+                tabIndex={0}
                 className="hover:text-gray-300 duration-500 ease-in-out text-lg font-sans flex cursor-pointer gap-2"
               >
                 <Link href="">
@@ -149,6 +153,10 @@ const NavbarLoggedIn = () => {
                 <div className=" flex items-end justify-center flex-col">
                   <li
                     onClick={openDropdown}
+                    onKeyDown={(e) => {
+                      if (e.key === "Enter" || e.key === " ") openDropdown();
+                    }}
+                    tabIndex={0}
                     className="hover:text-gray-300 duration-500 ease-in-out text-lg font-sans flex cursor-pointer"
                   >
                     <Link href="">

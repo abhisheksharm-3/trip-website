@@ -1,7 +1,6 @@
 import { connect } from "@/dbConfig/dbConfig";
 import Place from '@/models/placeModel';
 import { NextRequest, NextResponse } from "next/server";
-import mongoose from "mongoose";
 
 connect();
 

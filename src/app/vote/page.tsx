@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 "use client";
 // Import necessary modules and components
 import React, { useState, useEffect } from "react";
@@ -153,6 +154,13 @@ const Vote = () => {
                   key={place._id}
                   className="mb-4 cursor-pointer"
                   onClick={() => handleOpen(place)}
+                  tabIndex={0}
+                  onKeyDown={(e) => {
+                    if (e.key === "Enter" || e.key === " ") {
+                      handleOpen(place);
+                    }
+                  }}
+                  aria-label={`View details for ${place.name}`}
                 >
                   <div className="text-white">
                     <h3 className="text-xl font-bold mb-2">
@@ -215,7 +223,6 @@ const Vote = () => {
             <h2 className="text-3xl font-extrabold">{selectedPlace?.name}</h2>
             <p className="text-sm text-gray-500">Explore the details of {selectedPlace?.name}</p>
             <div className="mb-4">
-              {/* Replace 'imageUrl' with the actual property name from your data */}
               <img src={selectedPlace?.link} alt={selectedPlace?.name} className="w-full h-auto rounded-md" />
             </div>
           </ModalHeader>

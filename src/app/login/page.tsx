@@ -131,12 +131,13 @@ const Login = () => {
                 />
               </div>
               <div className="text-right">
-                <p
-                  className="text-right cursor-pointer text-purple-500 dark:text-purple-400 text-sm font-normal hover:text-purple-600 dark:hover:text-purple-500 ease-in-out duration-300  hover:font-medium underline"
+                <button
+                  type="button"
+                  className="text-right cursor-pointer text-purple-500 dark:text-purple-400 text-sm font-normal hover:text-purple-600 dark:hover:text-purple-500 ease-in-out duration-300 hover:font-medium underline bg-transparent border-none p-0"
                   onClick={() => setIsForgotPasswordOpen(true)}
                 >
                   Forgot Password?
-                </p>
+                </button>
               </div>
               <div className="mt-4">
                 <button
